@@ -16,6 +16,7 @@
 * 底部Popup：使用 `AppUtils.showBottomPopup()`
 * Dialog: 继承 `BaseDialog`
 * Handler：继承 `BaseHandler`
+* 如果使用 `Listview`, 适配器的优化使用 `com.lwf.util.ViewHolder`
 
 ### 线程池
 **不得使用** `new Thread()`，使用 `com.lwf.base.MyTask`
