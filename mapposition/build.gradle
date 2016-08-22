@@ -1,0 +1,140 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.1"
+
+    defaultConfig {
+        applicationId "com.lwf.mapposition"
+        minSdkVersion 13
+        targetSdkVersion 23
+
+        // 版本号可以参数配置
+        if (project.hasProperty('VER_CODE')) {
+            versionCode Integer.parseInt(VER_CODE)
+        } else {
+            versionCode 91010000
+        }
+        if (project.hasProperty('VER_NAME')) {
+            versionName VER_NAME
+        } else {
+            versionName "1.0.0"
+        }
+
+        buildConfigField("String", "GATEWAY_URL", "\"url\"")
+
+        if (project.hasProperty('API_HOST')) {
+            buildConfigField("String", "API_HOST", "\"${API_HOST}\"")
+        } else {
+            buildConfigField("String", "API_HOST", "\"url\"")
+        }
+
+        if (project.hasProperty('WEB_HOST')) {
+            buildConfigField("String", "WEB_HOST", "\"${WEB_HOST}\"")
+        } else {
+            buildConfigField("String", "WEB_HOST", "\"url\"")
+        }
+
+        if (project.hasProperty('SOCKET_TIMEOUT')) {
+            buildConfigField("Integer", "SOCKET_TIMEOUT", "\"${SOCKET_TIMEOUT}\"")
+        } else {
+            buildConfigField("Integer", "SOCKET_TIMEOUT", "15")
+        }
+
+//        manifestPlaceholders = [
+//                GETUI_APP_ID    : "GETUI_APP_ID",
+//                GETUI_APP_KEY   : "GETUI_APP_KEY",
+//                GETUI_APP_SECRET: "GETUI_APP_SECRET",
+//                PACKAGE_NAME    : applicationId,
+//                AMAP_APIKEY     : "AMAP_APIKEY",
+//                UMENG_APPKEY    : "UMENG_APPKEY",
+//                UMENG_CHANNEL   : "UMENG_CHANNEL"
+//        ]
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("jlbcampus.jks")
+            storePassword "storePassword"
+            keyAlias "keyAlias"
+            keyPassword "keyPassword"
+        }
+    }
+    buildTypes {
+        if (project.hasProperty('API_HOST')) {
+            beta {
+                if (project.hasProperty('MINIFY_ENABLED'))
+                    minifyEnabled Boolean.parseBoolean(MINIFY_ENABLED)
+                else
+                    minifyEnabled false
+
+                if (project.hasProperty('DEBUG_ENABLED'))
+                    debuggable Boolean.parseBoolean(DEBUG_ENABLED)
+                else
+                    debuggable false
+
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.release
+            }
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+        release {
+            if (project.hasProperty('MINIFY_ENABLED'))
+                minifyEnabled Boolean.parseBoolean(MINIFY_ENABLED)
+            else
+                minifyEnabled true
+
+            if (project.hasProperty('DEBUG_ENABLED'))
+                debuggable Boolean.parseBoolean(DEBUG_ENABLED)
+            else
+                debuggable false
+
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // 文件名
+            applicationVariants.all { variant ->
+                if (variant.name == "debug") {
+                    return;
+                }
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def today = new Date().format('yyMMddHHmm');
+                        // 输出apk名称
+                        def fileName = "Campus_stu_v${defaultConfig.versionName}_${defaultConfig.versionCode}_${today}.apk"
+//                        def fileName = "Campus_manager_v${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
+                        if (project.hasProperty('OUTPUT_DIR')) {
+                            output.outputFile = new File(OUTPUT_DIR, fileName)
+                        } else {
+                            output.outputFile = new File(outputFile.parent, fileName)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.jakewharton:butterknife:8.2.1'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.squareup.okio:okio:1.9.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile project(':share')
+}

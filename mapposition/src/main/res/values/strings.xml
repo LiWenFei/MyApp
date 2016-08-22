@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MapPosition</string>
+
+    <string name="loading">努力加载中</string>
+    <string name="date_now">现在</string>
+    <string name="date_just_now">刚刚</string>
+    <string name="date_yesterday">昨天</string>
+
+    <string-array name="week_name">
+        <item>星期日</item>
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+    </string-array>
+
+    <string name="request_failed">网络连接失败</string>
+    <string name="not_supported">无法打开</string>
+</resources>
