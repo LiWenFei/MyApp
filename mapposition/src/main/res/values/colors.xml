@@ -7,4 +7,6 @@
     <color name="gray_666666">#666666</color>
     <color name="blue_action_bar">#13bdfc</color>
     <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="webview_progressbar_bg1">#FC6769</color>
 </resources>

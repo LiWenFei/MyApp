@@ -10,7 +10,7 @@
 * Image : `com.squareup.picasso:picasso:2.5.2` - `Picasso`
 * List : `RecyclerView`、`CardView`
 * SharePreference : `com.jlb.campus.stu.utils.SP`
-* WebView : `WebViewActivity`，传入url和界面样式参数
+* WebView : `ProgressWebView`，传入url和界面样式参数
 * 屏幕适配 : 使用 `AbViewUtil` ，具体在 `BaseFragment` / `BaseFragmentActivity` 中已经封装
 * ActionBar：使用 `BaseFragmentActivity.ActionBarBuilder` 创建并显示，详见代码注释
 * 底部Popup：使用 `AppUtils.showBottomPopup()`
