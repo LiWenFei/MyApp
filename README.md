@@ -17,6 +17,7 @@
 * Dialog: 继承 `BaseDialog`
 * Handler：继承 `BaseHandler`
 * 如果使用 `Listview`, 适配器的优化使用 `com.lwf.util.ViewHolder`
+* Android开发人员不得不收集的代码  [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode)
 
 ### 线程池
 **不得使用** `new Thread()`，使用 `com.lwf.base.MyTask`
