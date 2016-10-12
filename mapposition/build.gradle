@@ -59,14 +59,14 @@ android {
         abortOnError false
     }
 
-    signingConfigs {
-        release {
-            storeFile file("jlbcampus.jks")
-            storePassword "storePassword"
-            keyAlias "keyAlias"
-            keyPassword "keyPassword"
-        }
-    }
+//    signingConfigs {
+//        release {
+//            storeFile file("jlbcampus.jks")
+//            storePassword "storePassword"
+//            keyAlias "keyAlias"
+//            keyPassword "keyPassword"
+//        }
+//    }
     buildTypes {
         if (project.hasProperty('API_HOST')) {
             beta {
@@ -81,12 +81,12 @@ android {
                     debuggable false
 
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-                signingConfig signingConfigs.release
+//                signingConfig signingConfigs.release
             }
         }
         debug {
             minifyEnabled false
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
         release {
             if (project.hasProperty('MINIFY_ENABLED'))
@@ -99,7 +99,7 @@ android {
             else
                 debuggable false
 
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // 文件名
             applicationVariants.all { variant ->
